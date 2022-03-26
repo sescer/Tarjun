@@ -1,8 +1,8 @@
-package ru.nsu.fit.g19213.tarjun;
+package ru.nsu.fit.g19213.test;
 
 public interface TestInterface {
 
     public String foo();
-    public Integer bar(Integer num);
+    public int bar(Integer num);
     public void tmp();
 }
