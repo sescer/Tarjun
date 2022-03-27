@@ -15,4 +15,8 @@ public class Test implements TestInterface {
     public void tmp() {
 
     }
+
+    public int multi(int a, int b) {
+        return a * b;
+    }
 }

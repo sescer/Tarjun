@@ -7,7 +7,7 @@ import ru.nsu.fit.g19213.tarjun.stubbing.Stubber;
 public class Tarjun {
 
     public static <T> T mock(Class<T> klass) {
-        return MockCreator.mock(klass, DelegationStrategy.RETURN_NULL);
+        return MockCreator.mock(klass, DelegationStrategy.RETURN_DEFAULT);
     }
 
     public static <T> T spy(Class<T> klass) {
