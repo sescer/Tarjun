@@ -6,6 +6,10 @@ public class Test implements TestInterface {
         return "Foo";
     }
 
+    public String bruh(Integer number){
+        return "Bruh";
+    }
+
     @Override
     public Integer bar(Integer num) {
         return num;

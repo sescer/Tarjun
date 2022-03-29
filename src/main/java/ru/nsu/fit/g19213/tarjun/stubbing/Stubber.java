@@ -10,4 +10,8 @@ public class Stubber<T> {
     public void invokeRealMethod() {
         TarjunInfo.getLastMockInvocationHandler().setRealMethodInvocation();
     }
+
+    public void thenThrow(Throwable throwable) {
+        TarjunInfo.getLastMockInvocationHandler().setThrowable(throwable);
+    }
 }

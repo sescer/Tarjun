@@ -8,6 +8,7 @@ class MockHolder {
     private final Method method;
     private final Object retObj;
     private final DelegationStrategy delegationStrategy;
+    private final Throwable toThrow;
 
 
     MockHolder(Method method, Object[] args, Object retObj) {
@@ -15,6 +16,7 @@ class MockHolder {
         this.method = method;
         this.retObj = retObj;
         this.delegationStrategy = DelegationStrategy.RETURN_CUSTOM;
+        this.toThrow = null;
     }
 
 
@@ -23,6 +25,16 @@ class MockHolder {
         this.method = method;
         this.retObj = null;
         this.delegationStrategy = DelegationStrategy.CALL_REAL_METHOD;
+        this.toThrow = null;
+
+    }
+
+    MockHolder(Method method, Object[] args, Throwable toThrow) {
+        this.args = args;
+        this.method = method;
+        this.retObj = null;
+        this.delegationStrategy = DelegationStrategy.RETURN_THROW;
+        this.toThrow = toThrow;
 
     }
 
@@ -38,6 +50,9 @@ class MockHolder {
         return retObj;
     }
 
+    Throwable getToThrow() {
+        return toThrow;
+    }
     DelegationStrategy getDelegationStrategy() {
         return delegationStrategy;
     }

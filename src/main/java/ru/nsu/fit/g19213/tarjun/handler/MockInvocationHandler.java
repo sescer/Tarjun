@@ -44,7 +44,8 @@ public class MockInvocationHandler {
                 switch (mockHolder.getDelegationStrategy()) {
                     case CALL_REAL_METHOD:
                         return zuper.call();
-
+                    case RETURN_THROW:
+                        throw mockHolder.getToThrow();
                     case RETURN_CUSTOM:
                         return getMostSpecificMatch(args);
 
@@ -69,6 +70,11 @@ public class MockInvocationHandler {
         mockHolders.removeIf(mockHolder -> mockHolder.getMethod().equals(lastMethod) &&
                 Arrays.deepEquals(mockHolder.getArgs(), lastArgs));
         mockHolders.add(new MockHolder(lastMethod, lastArgs));
+    }
+
+    public void setThrowable(Throwable throwable) {
+        mockHolders.removeIf(mockHolder -> mockHolder.getMethod().equals(lastMethod) && Arrays.deepEquals(mockHolder.getArgs(), lastArgs));
+        mockHolders.add(new MockHolder(lastMethod, lastArgs, throwable));
     }
 
     private Object getMostSpecificMatch(Object[] args) {

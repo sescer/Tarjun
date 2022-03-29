@@ -14,6 +14,9 @@ public class Main {
     @Spy
     private final Dog dog = new Dog("Bobik");
 
+    @Spy
+    private Dog dog2;
+
 
     public static void main(String[] args) {
         Main main = new Main();
@@ -46,6 +49,15 @@ public class Main {
         System.out.println(test.multi(10, 1)); // 1337
         System.out.println(test.multi(1, 1)); // 0
 
+        when(test.bruh(228)).invokeRealMethod();
+        System.out.println(test.bruh(228)); // Bruh
+
+        when(dog2.getDog()).thenThrow(new NullPointerException("Exception occurred when get name of dog2 "));
+        try {
+            dog2.getDog();
+        }catch (Throwable t){
+            System.out.println(t.getMessage());
+        }
         System.out.println(test instanceof Test); // true
     }
 }
