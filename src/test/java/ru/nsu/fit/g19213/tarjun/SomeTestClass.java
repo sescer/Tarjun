@@ -1,6 +1,6 @@
-package ru.nsu.fit.g19213.tarjun.examples;
+package ru.nsu.fit.g19213.tarjun;
 
-public class Test implements TestInterface {
+public class SomeTestClass implements TestInterface {
     @Override
     public String foo() {
         return "Foo";

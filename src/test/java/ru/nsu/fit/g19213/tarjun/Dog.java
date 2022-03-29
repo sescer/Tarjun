@@ -1,4 +1,4 @@
-package ru.nsu.fit.g19213.tarjun.examples;
+package ru.nsu.fit.g19213.tarjun;
 
 public class Dog {
 
