@@ -2,6 +2,9 @@ package ru.nsu.fit.g19213.tarjun.matchers;
 
 import ru.nsu.fit.g19213.tarjun.utils.TarjunInfo;
 
+import java.util.Objects;
+import java.util.function.Predicate;
+
 import static ru.nsu.fit.g19213.tarjun.utils.TarjunUtil.defaultValueOf;
 
 public class ArgumentMatchers {
@@ -21,6 +24,14 @@ public class ArgumentMatchers {
         return 0;
     }
 
+    /**
+     * Matches any string,
+     */
+    public static String anyStr() {
+        TarjunInfo.addArgumentMatcher(String.class::isInstance);
+        return "";
+    }
+
 
     /**
      * Matches the exact value passed.
@@ -31,6 +42,14 @@ public class ArgumentMatchers {
         return t;
     }
 
+    /**
+     * Matches any value passed that is not equal to the one passed.
+     * @param t the argument to match
+     */
+    public static <T> T notEq(T t) {
+        TarjunInfo.addArgumentMatcher((var o) -> !t.equals(o));
+        return t;
+    }
 
     /**
      * Matches any instance of a given class.
@@ -50,4 +69,34 @@ public class ArgumentMatchers {
         TarjunInfo.addArgumentMatcher((Object o) -> o.getClass().getCanonicalName().equals(klass.getCanonicalName()));
         return (T) defaultValueOf(klass);
     }
+
+    /**
+     * Matches all arguments that satisfy the provided predicate.
+     */
+    public static <T> T argThat(Predicate<T> pred) {
+        var tClass = ((Class<?>)(pred.getClass().getTypeParameters()[0].getBounds()[0]));
+        TarjunInfo.addArgumentMatcher((var o) -> (
+                tClass.isInstance(o) &&
+                pred.test((T) o))
+        );
+        return (T) defaultValueOf(tClass);
+    }
+
+    /**
+     * Only matches null.
+     */
+    public static <T> T isNull() {
+        TarjunInfo.addArgumentMatcher(Objects::isNull);
+        return null;
+    }
+
+
+    /**
+     * Matches any non-null argument.
+     */
+    public static <T> T notNull() {
+        TarjunInfo.addArgumentMatcher(Objects::nonNull);
+        return null;
+    }
+
 }
