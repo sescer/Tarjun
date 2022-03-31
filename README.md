@@ -1,4 +1,8 @@
+
+<img src="docs/tarjun.png" alt="drawing" align="right" style="width:300px;"/>
+
 # Tarjun
+
 Mock-framework for Java
 
 ## Features
